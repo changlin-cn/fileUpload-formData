@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>图片上传测试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://cdn.bootcss.com/axios/0.17.1/axios.js"></script>
+  </head>
+  <body>
+    <h1>图片上传测试</h1>
+    <p>图片上传测试</p>
+    <form ref='uploadForm'
+          id='uploadForm'
+          action='http://localhost:3000/upload'
+          method='post'
+          encType="multipart/form-data">
+      <div>
+        <input type="file" id="file" name="sampleFile"  accept="image/*" />
+      </div>
+      <div style="margin-top: 10px;">
+        <input type='button' id="button" value='Upload!' onclick="javascript:void (0)"/>
+      </div>
+
+    </form>
+
+    <img src="" id="img" width="100%" alt="">
+
+    <script>
+      var btn=document.getElementById('button');
+      var file=document.getElementById('file')
+      btn.addEventListener('click',function () {
+          alert(JSON.stringify(file.files))
+
+          var f=file.files[0];
+
+          if(f){
+              var fd=new FormData();
+              fd.append("sampleFile", f)
+              // 上传地址
+              axios.post('http://192.168.98.152:3000/upload',fd).then(
+                  function (d) {
+                      alert(JSON.stringify(d.data));
+                      //返回数据
+                      var data=d.data;
+                      img.src=data.url
+                  }
+
+              )
+          }else{
+              alert('请选择文件')
+          }
+
+
+      },false)
+
+    </script>
+  </body>
+</html>
