@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 var fileUpload = require('express-fileupload');
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var ip=require('./serverLib/index').ip;
+console.log(ip);
 var app = express();
 
 app.use(fileUpload())
@@ -41,7 +42,7 @@ app.post('/upload', function (req, res) {
         if (err)
             return res.status(500).send(err);
 
-        res.json({url:'http://192.168.98.152:3000/'+name});
+        res.json({url:'http://'+ip+':3000/'+name});
     });
 });
 
@@ -64,3 +65,6 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+
+

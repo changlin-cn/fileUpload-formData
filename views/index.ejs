@@ -3,7 +3,6 @@
   <head>
     <title>图片上传测试</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script src="https://a.alipayobjects.com/g/component/antbridge/1.1.4/antbridge.min.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.17.1/axios.js"></script>
   </head>
   <body>
@@ -47,7 +46,7 @@
 
                     alert('fd:'+JSON.stringify(fd))
                     // 上传地址
-                    axios.post('http://192.168.98.152:3000/upload',fd).then(
+                    axios.post('http://<%=ip%>:3000/upload',fd).then(
                         function (d) {
                             alert(JSON.stringify(d.data));
                             //返回数据
